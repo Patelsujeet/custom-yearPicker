@@ -1,0 +1,70 @@
+<template>
+
+<div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+
+    <ul class="slds-list--vertical">
+        <li class="slds-list__item">
+            <div class="slds-form-element__control slds-m-right_medium">
+                <input type="number" min="1950" id="year" name="year" onclick={openYearPicker} value={selectedYear}
+                        class="slds-input relative"/>
+            </div>
+        </li>
+        <li class="slds-list__item">
+            
+            <template if:true={openYear}>   
+                <div class="slds-datepicker slds-dropdown absolute" aria-hidden="false">
+                    <div class="slds-datepicker__filter slds-grid">
+                        <div class="slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-grow">
+                            <div class="slds-align-middle">
+                                <lightning-button-icon icon-name="utility:chevronleft" 
+                                                 variant="bare" alternative-text="Settings" 
+                                                title="Settings"
+                                                onclick={previousHandler}></lightning-button-icon>
+                            </div>
+                            <h2 id="month" class="slds-align-middle" aria-live="assertive" 
+                                aria-atomic="true" style="font-size: medium;font-weight: bold;">
+                                {selectedYear}
+                            </h2>
+                            <div class="slds-align-middle">
+                                <ul class="slds-list--horizontal">
+                                    <li class="slds-list__item">
+                                        <lightning-button-icon icon-name="utility:chevronright" 
+                                                             variant="bare" alternative-text="Settings" 
+                                                            title="Settings"  onclick={nextHandler}>
+                                            </lightning-button-icon>
+                                    </li>
+                                    <li class="slds-list__item">
+                                        
+                                        <lightning-button-icon icon-name="utility:close" 
+                                                        variant="border" alternative-text="Settings" 
+                                                        title="Settings"
+                                                        onclick={closeYearPicker}></lightning-button-icon>
+                                    </li>
+                                </ul>
+                               
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-grow">
+                        <div class="slds-grid slds-wrap">
+                            <template for:each={listYearPerPage} for:item="item">
+                                <div class="slds-col slds-size_1-of-3 slds-p-around_x-small month" 
+                                    key={item} onclick={selectYear}>
+                                    <span>{item}</span>
+                                </div>
+                            </template>
+                        
+                        </div>
+                    </div>
+                </div>
+            
+                
+            </template>
+
+        </li>
+    </ul>
+
+</div>
+</template>
