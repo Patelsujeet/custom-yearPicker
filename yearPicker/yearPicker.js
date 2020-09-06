@@ -1,5 +1,4 @@
 import { LightningElement, api, track,wire } from 'lwc';
-import { fireEvent } from 'c/pubsub';
 import { CurrentPageReference } from 'lightning/navigation';
 
 export default class YearPicker extends LightningElement {
@@ -98,12 +97,15 @@ export default class YearPicker extends LightningElement {
 
     selectYear(event){
         //console.log(event.target);
-        this.selectedYear=event.target.outerText;
+        this.selectedYear=event.target.innerText;
 
         /** passing the year to documentHeader */
-        fireEvent(this.pageRef,"selectYearEvent",{
+        /*fireEvent(this.pageRef,"selectYearEvent",{
             'selectedYear':this.selectedYear
-        })
+        })*/
+        this.dispatchEvent(new CustomEvent("selectyear",{
+            detail:this.selectedYear
+        }));
         this.closeYearPicker();
     }
 
